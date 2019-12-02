@@ -14,7 +14,7 @@ exports.getAllItems = async (req, res) => {
     }
     catch(error)
     {
-        console.log(error);
+        res.json({error:error.message});
     }
 };
 
@@ -27,10 +27,22 @@ exports.getItemByID = async (req, res) => {
     }
     catch(error)
     {
-      console.log(error);
+        res.json({error:error.message});
     }
-  }
+};
 
+
+exports.createItem = async (req, res) => {
+    try{
+        const isValidated = validator.createValidation(req.body);
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message });
+        const newItem =await Item.create(req.body);
+        res.json({msg:'Item was created successfully', data: newItem});
+    }
+    catch(error) {
+        res.json({error:error.message});
+    } 
+};
 
   exports.updateItem = async  (req, res) => {
     try{
@@ -44,7 +56,7 @@ exports.getItemByID = async (req, res) => {
     }
     catch(error)
     {
-      console.log(error);
+        res.json({error:error.message});
     }
   }
 
@@ -56,6 +68,6 @@ exports.getItemByID = async (req, res) => {
         res.json({msg:'Item was deleted successfully', data: deletedItem });
     }
     catch(error){
-      console.log(error);
+        res.json({error:error.message});
     }
   }
