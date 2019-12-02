@@ -6,10 +6,13 @@ const Schema = mongoose.Schema
 const NotificationSchema = new Schema({
     senderID:{
         type : Schema.Types.ObjectId ,
-        required : true 
+        required : true , 
+        ref:'User'
     },
     recieverID:{
         type : Schema.Types.ObjectId ,
+        required :true , 
+        ref:'User'
     },
     content : {
         type : String ,
@@ -22,7 +25,7 @@ const NotificationSchema = new Schema({
     isRead : {
         type : Boolean ,
         default:false
-    },
+    }
   
 })
 
