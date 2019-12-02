@@ -41,4 +41,4 @@ const ItemSchema = new schema({
     }
 });
 
-module.exports = Admin = mongo.model('Items',ItemSchema);
+module.exports = Item = mongo.model('Items',ItemSchema);
