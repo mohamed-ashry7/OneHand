@@ -33,12 +33,12 @@ const ItemSchema = new schema({
     },
     sellerID :{
         type : Schema.Types.ObjectId,
-        ref:'Users',
+        ref:'User',
     },
     payerID :{
         type : Schema.Types.ObjectId,
-        ref:'Users',
+        ref:'User',
     }
 });
 
-module.exports = Item = mongo.model('Items',ItemSchema);
+module.exports = Item = mongo.model('Item',ItemSchema);
