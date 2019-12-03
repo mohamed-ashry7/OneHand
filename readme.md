@@ -13,5 +13,13 @@ git config --global core.excludesfile ~/.gitignore_global
 
 git rm -r --cached root/backend/node_modules/
 
+# commands for pulling 
+
+git checkout  dev 
+
+git pull origin dev
+
+git checkout -b FEATURE 
+
 
 
