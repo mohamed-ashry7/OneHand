@@ -29,4 +29,4 @@ const UserSchema = new schema({
     },
 });
 
-module.exports = User = mongo.model('Users',UserSchema);
+module.exports = User = mongo.model('User',UserSchema);
