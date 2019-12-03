@@ -7,7 +7,7 @@ const PostingRequestSchema = new Schema({
         type : Schema.Types.ObjectId ,
         required : true 
     },
-    category :{ // 0->Donate , 1->Exchange ,2-> sell 
+    operation :{ // 0->Donate , 1->Exchange ,2-> sell 
         type : Integer
     },
     ItemID:{ // for exachange or donation 
@@ -19,7 +19,10 @@ const PostingRequestSchema = new Schema({
     } , 
     paymentMethod :{ // 0 -> cash , 1->Visa , 2 -> Both // the seller define which one he wants . 
         type:Integer 
-    } 
+    },
+    state:{ // 1->for selling , 2-> for exchange , -1 ->soldOut , -2 -> exchanged . 
+        type : Integer 
+    }
  
 })
 

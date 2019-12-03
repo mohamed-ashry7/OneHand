@@ -4,8 +4,7 @@
 const express = require('express') 
 const router = express.Router()
 const Notification = require('../../models/Notification')
-const Joi = require('joi') 
-Joi.objectId = require('joi-objectid')(Joi)
+const Validator = require('../../validations/notificationValidations')
 // getting all the notifications 
 
 router.get("/" , async(req , res )=>{
@@ -24,29 +23,23 @@ router.get("/:id" , async(req,res)=>{
 
 // Create new Notification 
 router.post("/" , async(req,res)=>{
-    const scheme = {
-        senderID :Joi.objectId().required() , 
-        recieverID : Joi.objectId().required() , 
-        content : Joi.string().required , 
-        date : Joi.date() , 
-        isRead : Joi.required() 
-    }
-    const result = Joi.validate(req.body, scheme)
+   
+    const result = Validator.PostNotificationValidation(req.body)
     if (result.error) {
         res.status(400).send({
             ERR:result.error.details[0].message
         })
     }
+    else {
     const newNotification =await Notification.create(req.body)
     res.status(200).send({
         Notification_Created : newNotification
-    })
+     })
+    }
 })
 
 router.delete('/:id' , async(req,res)=>{
-   const deletedNotfication =  await Notification.findByIdAndDelete({
-        _id:req.params.id 
-    })
+   const deletedNotfication =  await Notification.findByIdAndRemove(req.params.id)
     res.send({
         deleted_Notfication:deletedNotfication
     })

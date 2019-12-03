@@ -13,7 +13,7 @@ const OfferRequestSchema = new Schema({
         required : true ,
         ref:'User'
     },
-    category :{ //0-> Exchange ,1-> Buy 
+    operation :{ //0-> Exchange ,1-> Buy 
         type : Integer
     },
     ItemID:{ // for exachange or donation 
