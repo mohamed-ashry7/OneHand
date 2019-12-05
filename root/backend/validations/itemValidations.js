@@ -6,7 +6,7 @@ module.exports = {
         const createSchema = {
             type:Joi.string().required(),
             title:Joi.string().required(),
-            price:Joi.double(),
+            price:Joi.number(),
             category:Joi.string(),
             state:Joi.boolean().required(),
             description:Joi.string(),
@@ -20,7 +20,7 @@ module.exports = {
     updateValidation: item => {
         const updateSchema = {
             title:Joi.string(),
-            price:Joi.double(),
+            price:Joi.number(),
             category:Joi.string(),
             state:Joi.boolean(),
             description:Joi.string(),

@@ -6,7 +6,7 @@ const Item = require("../models/Item");
 exports.getAllItems = async (req, res) => {
     try{
         const items = await Item.find().populate("sellerID").populate("payerID");
-        if(requests.length===0)
+        if(items.length===0)
             res.json({msg : "empty"});
         else
             res.json({ data: items });
@@ -14,6 +14,7 @@ exports.getAllItems = async (req, res) => {
     catch(error)
     {
         res.json({error:error.message});
+        
     }
 };
 
@@ -48,10 +49,10 @@ exports.createItem = async (req, res) => {
         const itemID = req.params.id;
         const item =  await Item.findById(itemID);
         if(!item) return res.status(404).send({error: "Item does not exist"});
-        const isValidated = validator.requestUpdateValidation(req.body);
+        const isValidated = validator.updateValidation(req.body);
         if (isValidated.error) return   res.status(400).send({ error: isValidated.error.details[0].message });
-        const updatedItem = await Request.updateOne({'_id':itemID},req.body);
-        res.json({msg: 'Item updated successfully' , data: item });
+        const updatedItem = await Item.updateOne({'_id':itemID},req.body);
+        res.json({msg: 'Item updated successfully' , data: updatedItem });
     }
     catch(error)
     {
@@ -62,7 +63,7 @@ exports.createItem = async (req, res) => {
   exports.deleteItem =  async (req, res) => {
     try{ 
         const itemID = req.params.id;
-        const deletedItem = await Request.findByIdAndRemove(itemID);
+        const deletedItem = await Item.findByIdAndRemove(itemID);
         if(!deletedItem) return res.status(404).send({error: 'Item does not exist' });
         res.json({msg:'Item was deleted successfully', data: deletedItem });
     }

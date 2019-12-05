@@ -38,9 +38,10 @@ router.post('/' , async(req,res)=>{
 
 // no need to update the request . 
 
-router.delete('/:id' , (req,res) =>{
+router.delete('/:id' , async(req,res) =>{
     const result = await OfferRequest.findByIdAndRemove(req.params.id)
     res.send({
         deleted_OfferRequest:result
     })
 })
+module.exports = router
