@@ -12,7 +12,7 @@ module.exports = {
             description:Joi.string(),
             address:Joi.string().required(),
             sellerID :Joi.objectId(),
-            payerID:Joi.objectId()
+            buyerID:Joi.objectId()
         }
 
         return Joi.validate(item, createSchema)
@@ -26,7 +26,7 @@ module.exports = {
             description:Joi.string(),
             address:Joi.string(),
             sellerID :Joi.objectId(),
-            payerID:Joi.objectId()
+            buyerID:Joi.objectId()
         }
 
         return Joi.validate(item, updateSchema)
