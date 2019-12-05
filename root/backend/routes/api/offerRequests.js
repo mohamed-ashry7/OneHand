@@ -8,13 +8,13 @@ const Validator  = require('../../validations/offerRequestValidations')
 
 router.get('/' , async(req, res) =>{
     AllOfferRequests = await OfferRequest.find()
-    .populate("recieverID")
+    .populate("recieverID").populate("senderID").populate("ItemID")
     res.send({ALL_Requests: AllOfferRequests}) 
 })
 
 router.get('/:id' , async(req,res)=>{
     theOfferRequest = await OfferRequest.findById(req.params.id)
-    .populate("recieverID")
+    .populate("recieverID").populate("senderID").populate("ItemID")
     res.send({
         the_Offer_Request:theOfferRequest
     })
