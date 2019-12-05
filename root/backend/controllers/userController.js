@@ -2,7 +2,7 @@ const User = require("../models/User");
 const validator = require("../validations/userValidations");
 const Joi = require("joi");
 var ObjectId = require("mongoose").Types.ObjectId;
-
+const bcrypt =require('bcrypt-nodejs');
 
 exports.viewAllUsers = async (req, res) => {
     const users = await User.find()

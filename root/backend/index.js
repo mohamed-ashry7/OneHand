@@ -4,6 +4,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const config = require('./config/keys')
 const app = express()
+const users = require("./routes/api/users");
+const items = require("./routes/api/items");
+const notifications = require("./routes/api/notifications");
+const offerRequests = require("./routes/api/offerRequests");
 
 // Connecting to DataBase 
 mongoose.connect(config.mongoURI , { useNewUrlParser: true 
@@ -17,10 +21,14 @@ mongoose.connect(config.mongoURI , { useNewUrlParser: true
 })
 
 
+
 app.use(express.json())
 
 
-
+app.use("/api/users",users);
+app.use("/api/items",items);
+app.use("/api/notifications",notifications);
+app.use("/api/offerRequests",offerRequests);
 
 
 

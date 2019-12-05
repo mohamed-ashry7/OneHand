@@ -1,7 +1,7 @@
 const mongo = require('mongoose');
-const schema = mongo.Schema;
+const Schema = mongo.Schema;
 
-const ItemSchema = new schema({
+const ItemSchema = new Schema({
     type:{
         type:String,
         required:true
@@ -11,7 +11,7 @@ const ItemSchema = new schema({
         required:true
     },
     price:{
-        type:Double,
+        type:Number,
     },
     category:{
         type:String
