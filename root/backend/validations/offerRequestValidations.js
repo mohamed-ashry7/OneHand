@@ -12,10 +12,10 @@ module.exports = {
             senderID : Joi.objectId().required()  , 
             recieverID : Joi.objectId().required()  , 
             ItemID : Joi.objectId() , 
-            operation : Joi.Integer() , 
-            price : Joi.Integer() , 
-            paymentMethod : Joi.Integer() , 
-            state : Joi.Integer() 
+            operation : Joi.number() , 
+            price : Joi.number() , 
+            paymentMethod : Joi.number() , 
+            state : Joi.number() 
         }
         return  Joi.validate(OfferRequest,scheme) 
     }

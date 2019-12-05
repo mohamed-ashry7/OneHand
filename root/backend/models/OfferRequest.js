@@ -14,20 +14,20 @@ const OfferRequestSchema = new Schema({
         ref:'User'
     },
     operation :{ //0-> Exchange ,1-> Buy 
-        type : Integer
+        type : Number
     },
     ItemID:{ // for exachange or donation 
         type : Schema.Types.ObjectId ,
         ref:'Item'
     } ,
     price:{ // if there is a bet . 
-        type :Integer
+        type :Number
     } , 
     paymentMethod :{ // 0 -> cash , 1->Visa 
-        type:Integer 
+        type:Number 
     } , 
     state : { // 0-> pending , 1 -> reject , 2->accept
-        type :Integer
+        type :Number
     }
     
 })

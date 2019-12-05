@@ -9,7 +9,7 @@ module.exports = {
         const scheme = {
             senderID :Joi.objectId().required() , 
             recieverID : Joi.objectId().required() , 
-            content : Joi.string().required , 
+            content : Joi.string().required() , 
             date : Joi.date() , 
             isRead : Joi.required() 
         }

@@ -35,7 +35,7 @@ const ItemSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref:'User',
     },
-    payerID :{
+    buyerID :{
         type : Schema.Types.ObjectId,
         ref:'User',
     }

@@ -6,13 +6,13 @@ module.exports = {
         const createSchema = {
             type:Joi.string().required(),
             title:Joi.string().required(),
-            price:Joi.double(),
+            price:Joi.number(),
             category:Joi.string(),
             state:Joi.boolean().required(),
             description:Joi.string(),
             address:Joi.string().required(),
             sellerID :Joi.objectId(),
-            payerID:Joi.objectId()
+            buyerID:Joi.objectId()
         }
 
         return Joi.validate(item, createSchema)
@@ -20,13 +20,13 @@ module.exports = {
     updateValidation: item => {
         const updateSchema = {
             title:Joi.string(),
-            price:Joi.double(),
+            price:Joi.number(),
             category:Joi.string(),
             state:Joi.boolean(),
             description:Joi.string(),
             address:Joi.string(),
             sellerID :Joi.objectId(),
-            payerID:Joi.objectId()
+            buyerID:Joi.objectId()
         }
 
         return Joi.validate(item, updateSchema)
