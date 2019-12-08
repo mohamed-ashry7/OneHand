@@ -8,6 +8,7 @@ const users = require("./routes/api/users");
 const items = require("./routes/api/items");
 const notifications = require("./routes/api/notifications");
 const offerRequests = require("./routes/api/offerRequests");
+const bodyParser = require('body-parser');
 
 // Connecting to DataBase 
 mongoose.connect(config.mongoURI , { useNewUrlParser: true 
@@ -20,7 +21,9 @@ mongoose.connect(config.mongoURI , { useNewUrlParser: true
     console.log(err)
 })
 
+app.use(bodyParser.json());
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json())
 
@@ -37,7 +40,8 @@ app.use("/api/offerRequests",offerRequests);
 app.get("/",(req,res)=>{
     res.send("Root Page ") 
 })
-const Port = 3000 |process.env.PORT
+const Port = process.env.PORT || 3000 
 app.listen(Port,()=>{
-    console.log(`WORKING ON PORT ${Port}`)
+    console.log(`WORKING Fine `)
 })
+
