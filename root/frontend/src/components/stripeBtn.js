@@ -4,14 +4,15 @@ import axios from "axios";
 
 
 const stripeBtn = ({price}) => {
-const publishableKey = "pk_test_OXaOFv02nPl06SwomHwWyKvE00HgEX8x7G";
+const publishableKey = process.env.REACT_APP_API_STRIPE_PUBLISH_KEY;
+const port = process.env.REACT_APP_PORT ; 
    
   const onToken = token => {
     const body = {
       amount: price,
       token: token
   };  axios
-      .post("http://localhost:3001/api/stripePayment/charge", body)
+      .post(`http://localhost:${port}/api/stripePayment/charge`, body)
       .then(response => {
         console.log(response);
         alert("Payment Success");

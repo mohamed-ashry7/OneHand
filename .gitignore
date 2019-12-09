@@ -2,6 +2,7 @@
 /root/frontend/node_modules/
 /root/backend/package-lock.json
 /root/frontend/package-lock.json
+/root/frontend/.env
 
 # Compiled source #
 ###################
@@ -40,3 +41,4 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+.env

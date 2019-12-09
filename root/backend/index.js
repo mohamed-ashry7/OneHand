@@ -54,8 +54,8 @@ app.use('/api/stripePayment', stripePayment) ;
 app.get("/",(req,res)=>{
     res.send("Root Page ") 
 })
-const Port = process.env.PORT || 3001
+const Port = process.env.PORT || 3000
 app.listen(Port,()=>{
-    console.log(`WORKING Fine `)
+    console.log(`WORKING in a Fine way ${Port}`)
 })
 
