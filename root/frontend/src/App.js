@@ -1,15 +1,18 @@
-import React, { Component } from "react";
-import "./App.css";
-import StripeBtn from "./components/stripeBtn";
+import React, { Component } from 'react';
+import './App.css';
+import Main from './components/MainTheme/Main'
 
-class App extends Component {  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-        {/* here send the price times * 100 because it is in cents */}
-          {/* <StripeBtn price={500}/>  */}
-        </header>
-      </div>
-      );
+class App extends Component{
+  state = {
+    item: {},
+  };
+  
+  render() {
+  return (
+    <Main/>
+  );
   }
-}export default App;
+}
+
+export default App;
+

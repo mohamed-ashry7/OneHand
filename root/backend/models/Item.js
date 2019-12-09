@@ -20,10 +20,14 @@ const ItemSchema = new Schema({
         type:Boolean,
         required:true,
     },
-    photo:{
-        data: Buffer,
-        contentType: String 
-    },
+    Image: {
+        type: Buffer,
+        required: true
+      },
+    ImageType: {
+        type: String,
+        required: true
+      },
     description:{
         type:String,
     },
