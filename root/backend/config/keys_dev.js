@@ -1,6 +1,9 @@
 
-
+const dotenv=require('dotenv') ;
+dotenv.config({
+    path:require('find-config')('.env') 
+});
 module.exports = {
-    mongoURI:'mongodb+srv://MohamedAshry:3iJ94dqyeKXCARH@cluster0-g3afv.mongodb.net/test?retryWrites=true&w=majority',
+    mongoURI:process.env.DATABASE_CONNECTION_STRING,
     secretOrKey:'verysecretkey'
 }

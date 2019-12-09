@@ -1,15 +1,19 @@
 
 
 const express = require('express')
-const mongoose = require('mongoose')
-const config = require('./config/keys')
-const cors = require("cors")
-const app = express()
+const mongoose = require('mongoose');
+const config = require('./config/keys');
+const cors = require("cors");
+const app = express();
 const users = require("./routes/api/users");
 const items = require("./routes/api/items");
 const notifications = require("./routes/api/notifications");
 const offerRequests = require("./routes/api/offerRequests");
 const bodyParser = require('body-parser');
+const dotenv=require('dotenv') ;
+dotenv.config({
+    path:require('find-config')('.env') 
+});
 const stripePayment = require('./routes/api/stripeApi') ; 
 
 var jsonParser       = bodyParser.json({limit:1024*1024*20, type:'application/json'});
@@ -52,6 +56,6 @@ app.get("/",(req,res)=>{
 })
 const Port = process.env.PORT || 3000
 app.listen(Port,()=>{
-    console.log(`WORKING Fine `)
+    console.log(`WORKING in a Fine way ${Port}`)
 })
 
