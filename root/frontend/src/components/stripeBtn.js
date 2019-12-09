@@ -10,12 +10,6 @@ price = price*100;
 function refreshPage() {
   window.location.reload(true);
 }
-
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
-
   const onToken = token => {
     console.log(price);
     const body = {
@@ -34,22 +28,8 @@ var dateTime = date+' '+time;
             `http://localhost:${port}/api/items/`+item._id ,ubdatebody
           )
           .then(res => {
-            let body={
-                senderID:"5de6eb301d09972504e4464f",
-                recieverID:item.sellerID,
-                content : "Your item has been sold",
-                date: dateTime,
-                isRead :false
-              };
-            let res;
-            try {
-              res = axios.post(`http://localhost:${port}/api/notifications`, body);
-              if (res != null) {
-                alert("Payment Success");
-                handleCloseCash();
-                handleClose();
-              }
-            } catch(error) {console.log(error.message)}
+            alert("Payment Success");
+            refreshPage();
           });
       })
       .catch(error => {
