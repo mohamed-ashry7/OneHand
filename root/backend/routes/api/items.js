@@ -3,6 +3,9 @@ const router = express.Router();
 
 const itemFunctions = require('../../controllers/itemController')
 
+// Get items in Range
+router.get("/withRange/:type/:limit/:offset",itemFunctions.getItemsInRange);
+
 // Get all items
 router.get("/",itemFunctions.getAllItems);
 

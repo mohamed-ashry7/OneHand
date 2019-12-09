@@ -12,7 +12,8 @@ module.exports = {
             description:Joi.string(),
             address:Joi.string().required(),
             sellerID :Joi.objectId(),
-            buyerID:Joi.objectId()
+            buyerID:Joi.objectId(),
+            image:Joi.object()
         }
 
         return Joi.validate(item, createSchema)
@@ -26,7 +27,8 @@ module.exports = {
             description:Joi.string(),
             address:Joi.string(),
             sellerID :Joi.objectId(),
-            buyerID:Joi.objectId()
+            buyerID:Joi.objectId(),
+            image:Joi.object()
         }
 
         return Joi.validate(item, updateSchema)
