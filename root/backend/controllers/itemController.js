@@ -84,16 +84,10 @@ exports.createItem = async (req, res) => {
 
 function saveImage(item, image) {
     if (image == null) return
-    //console.log(image);
-    console.log("dddddddddddddddddddddddddddddddhkjhlkhlkjhdd");
-    //const newImage = JSON.parse(image)
-    //console.log(newImage);
     if (image != null && imageMimeTypes.includes(image.type)) {
-       
         item.Image = new Buffer.from(image.data, 'base64')
         item.ImageType = image.type
     }
-    console.log("dddddddddddddddddddddddddddddddhkjhlkhlkjhdd");
 }
 
   exports.updateItem = async  (req, res) => {
