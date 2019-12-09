@@ -1,5 +1,6 @@
 /root/backend/node_modules/
 /root/backend/package-lock.json
+/root/frontend/package-lock.json
 
 # Compiled source #
 ###################
