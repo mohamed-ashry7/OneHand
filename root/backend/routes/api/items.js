@@ -6,6 +6,8 @@ const itemFunctions = require('../../controllers/itemController')
 
 const validator = require('../../validations/itemValidations');
 const Item = require("../../models/Item");
+// Get items in Range
+router.get("/withRange/:type/:limit/:offset",itemFunctions.getItemsInRange);
 
 // Get all items
 router.get("/",auth,async (req, res) => {
