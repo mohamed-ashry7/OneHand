@@ -9,7 +9,6 @@ const users = require("./routes/api/users");
 const items = require("./routes/api/items");
 const notifications = require("./routes/api/notifications");
 const offerRequests = require("./routes/api/offerRequests");
-const cors = require("cors");
 const bodyParser = require('body-parser');
 const stripePayment = require('./routes/api/stripeApi') ; 
 
@@ -51,7 +50,7 @@ app.use('/api/stripePayment', stripePayment) ;
 app.get("/",(req,res)=>{
     res.send("Root Page ") 
 })
-const Port = process.env.PORT || 3001
+const Port = process.env.PORT || 3000
 app.listen(Port,()=>{
     console.log(`WORKING Fine `)
 })

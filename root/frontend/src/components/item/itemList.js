@@ -15,6 +15,10 @@ export class ItemList extends Component {
     console.log(this.state.type);
     this.fetchItems();
    }
+   reLoad=()=>{
+     this.setState({items: [],count : 2,offset : 0}) ;
+     this.fetchItems();
+   }
 
   fetchItems = () => {
     const { count, offset, type } = this.state;
@@ -72,7 +76,7 @@ export class ItemList extends Component {
           }
         >
           {this.state.items.map(item => (
-            <ItemCard key={item._id} item={item}/>
+            <ItemCard key={item._id} item={item} reLoad={this.reLoad}/>
           ))}
         </InfiniteScroll>
     );

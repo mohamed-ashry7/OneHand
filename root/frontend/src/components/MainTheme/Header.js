@@ -39,7 +39,9 @@ const styles = theme => ({
 
 function Header(props) {
   const { classes, onDrawerToggle } = props;
-
+  function refreshPage() {
+    window.location.reload(true);
+  }
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -83,7 +85,7 @@ function Header(props) {
               </Typography>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="primary" className={classes.addUser} >
+              <Button variant="contained" color="primary" className={classes.addUser} onClick = {refreshPage}  >
                 LogOut
               </Button>
             </Grid>
