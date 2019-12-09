@@ -60,6 +60,7 @@ docker run -p <NEWPORT>:3000 <USERNAME>/<IMAGENAME>:<TAG> # it is 3000 as it is 
 ```
 
 # NOTICE :
-when using docker environment and want to link the frontend to it just put in ``root/fronten/.env`` file ``REACT_APP_PORT=<NEW_PORT_YOU_HAVE_SELECTED>``
+when using docker-compose environment and you want to link the frontend to it put ``root/fronten/.env`` file ``REACT_APP_PORT=3030`` as it ``PORT=3030`` is the default so to change it edit ``docker-compose.yml``.
+But when using docker environment just put in ``root/fronten/.env`` file ``REACT_APP_PORT=<NEW_PORT_YOU_HAVE_SELECTED>``
 
 
