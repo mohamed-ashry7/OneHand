@@ -8,7 +8,7 @@ module.exports = {
             email: Joi.string().email().required(),
             password: Joi.string().min(8).alphanum().required(),
             phone: Joi.number().required(),
-            address:Joi.string().required()  
+            address:Joi.string.required()  
         }
 
         return Joi.validate(request, createSchema)

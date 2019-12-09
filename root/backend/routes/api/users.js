@@ -3,12 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 // We will be connecting using database
 const User = require("../../models/User");
-const bcrypt = require('bcrypt-nodejs');
 var userController = require("../../controllers/userController");
-
-
-
-router.post('/login',userController.loginUser);
 
 router.get('/',userController.viewAllUsers);
 
