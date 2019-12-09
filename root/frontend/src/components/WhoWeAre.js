@@ -38,7 +38,6 @@ const styles = theme => ({
 });
 
 function ItemForm(props) {
-  const { classes} = props;
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));

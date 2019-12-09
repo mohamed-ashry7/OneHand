@@ -2,12 +2,17 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
-
-const stripeBtn = ({price}) => {
+const stripeBtn = ({item}) => {
 const publishableKey = process.env.REACT_APP_API_STRIPE_PUBLISH_KEY;
 const port = process.env.REACT_APP_PORT ; 
-   
+let price = item.price;
+price = price*100;
+function refreshPage() {
+  window.location.reload(true);
+}
+const publishableKey = "pk_test_OXaOFv02nPl06SwomHwWyKvE00HgEX8x7G";
   const onToken = token => {
+    console.log(price);
     const body = {
       amount: price,
       token: token
@@ -15,7 +20,18 @@ const port = process.env.REACT_APP_PORT ;
       .post(`http://localhost:${port}/api/stripePayment/charge`, body)
       .then(response => {
         console.log(response);
-        alert("Payment Success");
+        console.log(item);
+        const ubdatebody = {
+          state:true,
+        };
+        axios
+          .put(
+            "http://localhost:3000/api/items/"+item._id ,ubdatebody
+          )
+          .then(res => {
+            alert("Payment Success");
+            refreshPage();
+          });
       })
       .catch(error => {
         console.log( error);
@@ -24,7 +40,8 @@ const port = process.env.REACT_APP_PORT ;
   };  return (
     
     <StripeCheckout
-      label="Purchase" //Component button text
+      color="primary" style={{position: "absolute",right:"0px"}}
+      label="Buy" //Component button text
       name="OneHand Inc." //Modal Header
       description="What concerns us is your demands"
       panelLabel="Purchase" //Submit button in modal
@@ -36,4 +53,4 @@ const port = process.env.REACT_APP_PORT ;
     
   );
 };
-export default stripeBtn;
+export default (stripeBtn);
