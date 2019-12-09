@@ -12,6 +12,9 @@ import { withStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import PropTypes from 'prop-types';
 import ItemForm from "./../item/ItemForm"
+const port = process.env.REACT_APP_PORT ; 
+
+
 const styles = theme => ({
   paper: {
     maxWidth: 936,
@@ -41,6 +44,7 @@ function ExchangeForm(props) {
   const [openCash, setOpenCash] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const {item} = props;
   let price ="";
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,6 +65,30 @@ function ExchangeForm(props) {
   const sendToOwner = () => {
     setOpenCash(false);
   };
+      
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+  
+  const createItem = () => {
+    let body={
+        senderID:"5de6eb301d09972504e4464f",
+        recieverID:item.sellerID,
+        content : "there is one offer "+price+" to you on your "+item.title+" stuff connect with him",
+        date: dateTime,
+        isRead :false
+      };
+    let res;
+    try {
+      res = axios.post(`http://localhost:${port}/api/notifications`, body);
+      if (res != null) {
+        alert("Your offer was sent successfully");
+        handleCloseCash();
+        handleClose();
+      }
+    } catch(error) {console.log(error.message)}
+  };
   
     return(
       <React.Fragment>
@@ -75,17 +103,17 @@ function ExchangeForm(props) {
           onClose={handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{ "Enter Your Item Information:"}</DialogTitle>
-          <DialogContent  style={{height: "100px"}}>
+          <DialogTitle id="responsive-dialog-title">{ "How you want to exchange?"}</DialogTitle>
+          <DialogContent  style={{height: "60px"}}>
             <React.Fragment>
               <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={4}>
                     <Button variant="contained" color="primary" className={classes.addUser} onClick={handleClickOpenCash}>
                         Cash
                     </Button>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <ItemForm Type="Exchange"/>
+                <Grid item xs={12} sm={8}>
+                    <ItemForm type="Exchange1" item={item}/>
                 </Grid>
               </Grid>
             </React.Fragment>
@@ -102,8 +130,8 @@ function ExchangeForm(props) {
           onClose={handleCloseCash}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{ "Enter Your Item Information:"}</DialogTitle>
-          <DialogContent>
+          <DialogTitle id="responsive-dialog-title">{ "Enter Your Offer:"}</DialogTitle>
+          <DialogContent  style={{height: "80px"}}>
             <React.Fragment>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -113,7 +141,7 @@ function ExchangeForm(props) {
                     type="number"
                     id="price"
                     name="price"
-                    label="Price"
+                    label="Amount"
                     fullWidth
                     autoComplete="price"
                   />
@@ -125,7 +153,7 @@ function ExchangeForm(props) {
             <Button onClick={handleCloseCash} color="primary" autoFocus>
               Cancel
             </Button>
-            <Button onClick={sendToOwner} color="primary" autoFocus>
+            <Button onClick={createItem} color="primary" autoFocus>
               Send
             </Button>
           </DialogActions>

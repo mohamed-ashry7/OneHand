@@ -10,7 +10,6 @@ price = price*100;
 function refreshPage() {
   window.location.reload(true);
 }
-const publishableKey = "pk_test_OXaOFv02nPl06SwomHwWyKvE00HgEX8x7G";
   const onToken = token => {
     console.log(price);
     const body = {
@@ -26,7 +25,7 @@ const publishableKey = "pk_test_OXaOFv02nPl06SwomHwWyKvE00HgEX8x7G";
         };
         axios
           .put(
-            "http://localhost:3000/api/items/"+item._id ,ubdatebody
+            `http://localhost:${port}/api/items/`+item._id ,ubdatebody
           )
           .then(res => {
             alert("Payment Success");

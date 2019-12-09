@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ItemCard from "./itemCard";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+const port = process.env.REACT_APP_PORT ; 
 
 export class ItemList extends Component {
   state = {
@@ -26,7 +27,7 @@ export class ItemList extends Component {
     console.log(count,offset,type,this.state.items)
     axios
       .get(
-        "http://localhost:3000/api/items/withRange/" + type + "/" + count + "/" + offset,
+        `http://localhost:${port}/api/items/withRange/` + type + "/" + count + "/" + offset,
       )
       .then(res => {
         if (res.data.data.length > 0) {
