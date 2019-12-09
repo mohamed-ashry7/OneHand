@@ -106,14 +106,6 @@ function saveImage(item, image) {
     }
   }
 
-  exports.deleteItem =  async (req, res) => {
-    try{ 
-        const itemID = req.params.id;
-        const deletedItem = await Item.findByIdAndRemove(itemID);
-        if(!deletedItem) return res.status(404).send({error: 'Item does not exist' });
-        res.json({msg:'Item was deleted successfully', data: deletedItem });
-    }
-    catch(error){
-        res.json({error:error.message});
-    }
-  }
+
+
+  

@@ -40,8 +40,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json())
-
-
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+app.use(cors());
 app.use("/api/users",users);
 app.use("/api/items",items);
 app.use("/api/notifications",notifications);
