@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import PropTypes from 'prop-types';
+const port = process.env.REACT_APP_PORT ; 
 
 const styles = theme => ({
   paper: {
@@ -104,7 +105,8 @@ function ItemForm(props) {
     console.log(body);
     let res;
     try {
-      res = axios.post("http://localhost:3000/api/items", body);
+      res = axios.post(`http://localhost:${port}/api/items`, body);
+      console.log(`http://localhost:${port}/api/items`)
       if (res.status === 200) {
         alert("Item was added successfully");
         refreshPage();

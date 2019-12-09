@@ -6,6 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Stripe from "../stripeBtn"
+import EschangeForm from "../Exchange/EschangeForm"
 
 
 class ItemCard extends React.Component {
@@ -86,9 +87,7 @@ class ItemCard extends React.Component {
           <h4 size="small" color="primary">
              {(sellerID!=null)?sellerID.firstName + " " +sellerID.lastName:""} 
           </h4>
-          {(item.type === "Sell")?<Stripe item={item}/>:<Button size="big" color="primary" style={{position: "absolute",right:"0px"}} >
-              Exchange
-          </Button>}
+          {(item.type === "Sell")?<Stripe item={item}/>:<EschangeForm/>}
         </CardActions>
       </Card>
     );
