@@ -8,6 +8,16 @@ const users = require("./routes/api/users");
 const items = require("./routes/api/items");
 const notifications = require("./routes/api/notifications");
 const offerRequests = require("./routes/api/offerRequests");
+const cors = require("cors");
+const bodyParser = require('body-parser');
+
+var jsonParser       = bodyParser.json({limit:1024*1024*20, type:'application/json'});
+var urlencodedParser = bodyParser.urlencoded({ extended:true,limit:1024*1024*20,type:'application/x-www-form-urlencoded' })
+
+app.use(jsonParser);
+app.use(urlencodedParser);
+
+app.use(cors());
 
 // Connecting to DataBase 
 mongoose.connect(config.mongoURI , { useNewUrlParser: true 
