@@ -22,11 +22,9 @@ const ItemSchema = new Schema({
     },
     Image: {
         type: Buffer,
-        required: true
       },
     ImageType: {
         type: String,
-        required: true
       },
     description:{
         type:String,
@@ -42,6 +40,11 @@ const ItemSchema = new Schema({
     buyerID :{
         type : Schema.Types.ObjectId,
         ref:'User',
+    },
+    itemToExchangeID :
+    {
+        type: [Schema.Types.ObjectId],
+        ref:'Item' 
     }
 });
 

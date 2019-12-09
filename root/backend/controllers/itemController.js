@@ -55,11 +55,9 @@ exports.getItemByID = async (req, res) => {
 
 
 exports.createItem = async (req, res) => {
-    console.log("ddddddddddddddddddddddddddddddddddddddddddd");
     try{
         const isValidated = validator.createValidation(req.body);
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message });
-        console.log("ddddddddddddddddddddddddddddddddddddddddddd");
         const item = new Item({
             type:req.body.type,
             title:req.body.title,
@@ -69,13 +67,12 @@ exports.createItem = async (req, res) => {
             description:req.body.description,
             address:req.body.address,
             sellerID :req.body.sellerID,
-            buyerID :req.body.buyerID
+            buyerID :req.body.buyerID,
+            itemToExchangeID: req.body.itemToExchangeID
         })
         saveImage(item, req.body.image)
-        console.log("dddddddddddddddddfxxxfffddddddddddddddddddddddd");
-        //console.log(item)
         await item.save()
-        res.json({msg:'Item was created successfully', data: newItem});
+        res.json({msg:'Item was created successfully', data: item});
     }
     catch(error) {
         res.json({error:error.message});

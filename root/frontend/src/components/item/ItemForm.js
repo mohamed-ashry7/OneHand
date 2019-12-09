@@ -51,9 +51,9 @@ function ItemForm(props) {
   var description = "";
   var price = 0;
 
-  function refreshPage() {
-    window.location.reload(true);
-  }
+    function refreshPage() {
+     window.location.reload(true);
+    }
 
   const onChangeValueHandler = (val) => {
     file = val; 
@@ -66,9 +66,46 @@ function ItemForm(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(type)
   const createItem = () => {
+    console.log("jkhkljhlkjh")
     let body=null;
+    if(type === "Exchange1"){
+      body = {
+        type:"Exchange",
+        title:title,
+        category:category,
+        state:false,
+        image:file,
+        description:description,
+        address:(country+"/"+city+"/"+addressline),
+        itemToExchangeID:[props.item._id]
+      };
+      console.log(body)
+      try {
+        axios.post(`http://localhost:${port}/api/items`, body)
+        .then(res => {
+            console.log(props.item.itemToExchangeID)
+            let itemToExchangeID;
+            if(props.item.itemToExchangeID != null)
+              itemToExchangeID = props.item.itemToExchangeID.concat(res.data.data._id);
+            else 
+              itemToExchangeID = [res.data.data._id];
+            let ubdatebody ={
+              itemToExchangeID:itemToExchangeID
+            }
+            console.log(ubdatebody)
+            axios.put(
+              `http://localhost:${port}/api/items/`+props.item._id ,ubdatebody
+            )
+            .then(res => {
+              console.log(res)
+              alert("Item Created and connected to the item you want");
+              refreshPage();
+            });
+        });
+      } catch(error) {console.log(error.message)}
+    }else{
     if(type==="Sell"){
       body = {
         type:"Sell",
@@ -89,8 +126,7 @@ function ItemForm(props) {
         description:description,
         address:(country+"/"+city+"/"+addressline)
       };
-    }
-    else{
+    }else{
       body = {
         type:"Exchange",
         title:title,
@@ -101,17 +137,16 @@ function ItemForm(props) {
         address:(country+"/"+city+"/"+addressline)
       };
     }
-    console.log(type)
-    console.log(body);
-    let res;
+    console.log(body)
     try {
-      res = axios.post(`http://localhost:${port}/api/items`, body);
-      console.log(`http://localhost:${port}/api/items`)
-      if (res.status === 200) {
+      axios.post(`http://localhost:${port}/api/items`, body)
+      .then(res => {
         alert("Item was added successfully");
+        console.log(res)
         refreshPage();
-      }
+      });
     } catch(error) {console.log(error.message)}
+    }
     handleClose();
   };
   if(type==="Sell"){
@@ -231,7 +266,7 @@ function ItemForm(props) {
         </Dialog>
       </React.Fragment>
     );
-  }if(type==="Donate"){
+  }else if(type==="Donate"){
     return(
       <React.Fragment>
         <Grid item>
@@ -318,6 +353,111 @@ function ItemForm(props) {
                     autoComplete="description"
                     variant="outlined"
                   />
+                </Grid>
+              </Grid>
+            </React.Fragment>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary" autoFocus>
+              Cancel
+            </Button>
+            <Button onClick={createItem} color="primary" autoFocus>
+              Create
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </React.Fragment>
+    );
+  }else if(type==="Exchange1"){
+    return(
+      <React.Fragment>
+        <Grid item>
+          <Button variant="contained" color="primary" style={{position: "absolute",right:"0px",marginRight:"35px"}} className={classes.addUser} onClick={handleClickOpen}>
+             Stuff
+          </Button>
+        </Grid>
+        <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">{ "Enter Your Item Information:"}</DialogTitle>
+          <DialogContent>
+            <React.Fragment>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="title"
+                    name="title"
+                    label="Title"
+                    onChange={(e) => { title = e.target.value;}}
+                    fullWidth
+                    autoComplete="title"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="category"
+                    onChange={(e) => { category = e.target.value;}}
+                    name="category"
+                    label="Category"
+                    fullWidth
+                    autoComplete="category"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    onChange={(e) => { city = e.target.value;}}
+                    id="city"
+                    name="city"
+                    label="City"
+                    fullWidth
+                    autoComplete="billing address-level2"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    onChange={(e) => { country = e.target.value;}}
+                    id="country"
+                    name="country"
+                    label="Country"
+                    fullWidth
+                    autoComplete="billing country"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    onChange={(e) => { addressline = e.target.value;}}
+                    id="address"
+                    name="address"
+                    label="Address line"
+                    fullWidth
+                    autoComplete="billing address-line"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    multiline={true}
+                    rows = "6"
+                    required
+                    onChange={(e) => { description = e.target.value;}}
+                    id="description"
+                    name="description"
+                    label="Description"
+                    fullWidth
+                    autoComplete="description"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                <Filepond file={file} onChangeValue={onChangeValueHandler}/>
                 </Grid>
               </Grid>
             </React.Fragment>
