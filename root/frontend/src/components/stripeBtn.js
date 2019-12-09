@@ -41,13 +41,10 @@ var dateTime = date+' '+time;
                 date: dateTime,
                 isRead :false
               };
-            let res;
             try {
               res = axios.post(`http://localhost:${port}/api/notifications`, body);
               if (res != null) {
                 alert("Payment Success");
-                handleCloseCash();
-                handleClose();
               }
             } catch(error) {console.log(error.message)}
           });

@@ -107,17 +107,15 @@ function ItemForm(props) {
               console.log(res)
               let body={
                   senderID:"5de6eb301d09972504e4464f",
-                  recieverID:item.sellerID,
-                  content : "there is one offer "+res.data.data.title+" to you on your "+item.title+" stuff connect with him",
+                  recieverID:props.item.sellerID,
+                  content : "there is one offer "+res.data.data.title+" to you on your "+props.item.title+" stuff connect with him",
                   date: dateTime,
                   isRead :false
                 };
-              let res;
               try {
                 res = axios.post(`http://localhost:${port}/api/notifications`, body);
                 if (res != null) {
                   alert("Your offer was sent successfully");
-                  handleCloseCash();
                   handleClose();
                 }
               } catch(error) {console.log(error.message)}
