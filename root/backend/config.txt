@@ -1,0 +1,2 @@
+mongodb+srv://MohamedAshry:<3iJ94dqyeKXCARH>@cluster0-g3afv.mongodb.net/test?retryWrites=true&w=majority
+pass = 3iJ94dqyeKXCARH

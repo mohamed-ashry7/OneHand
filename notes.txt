@@ -1,0 +1,8 @@
+note that there are env variables 
+connection string 
+port 
+publish and public key of stripe 
+
+docker commands 
+docker built -t happy-joker/onehand:1.0.0 . 
+docker run -p newPort:defPort happy-joker/onehand:1.0.0
