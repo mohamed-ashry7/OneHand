@@ -1,14 +1,61 @@
 const User = require("../models/User");
 const validator = require("../validations/userValidations");
-const Joi = require("joi");
-var ObjectId = require("mongoose").Types.ObjectId;
+const jwt = require('jsonwebtoken');
 const bcrypt =require('bcrypt-nodejs');
+
+
 
 exports.viewAllUsers = async (req, res) => {
     const users = await User.find()
     res.json({ data: users });
   };
 
+
+
+exports.loginUser = async (req,res,next)=>{
+try{
+    const user = await User.find({email:req.body.email})
+    if(!user){
+        res.status.json({
+            message:"User not found"
+        })
+    }
+    bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
+        if(err){
+            return res.status(401).json({
+                message:"Auth Failed"
+            })
+        }
+
+        if(result){
+
+            const token = jwt.sign({
+                email:user[0].email,
+                userID:user[0]._id
+            },"secretKey",
+            {
+                expiresIn:"1h"
+            })
+            console.log(token)
+
+            return res.status(200).json({
+                message:"Successful Auth",
+                token:token
+            })
+
+        }
+
+         res.status(401).json({
+            message:"Auth Failed"
+        })
+
+    })
+}catch(error){
+    console.log(error);
+}
+
+
+}  
 
 exports.viewOneUserByID = async (req, res) => {
     try {
