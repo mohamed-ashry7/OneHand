@@ -74,8 +74,8 @@ function ExchangeForm(props) {
   const createItem = () => {
     let body={
         senderID:"5de6eb301d09972504e4464f",
-        recieverID:"5de6eb301d09972504e4464f",
-        content : "there are one offer "+price+" to you on your "+item.title+" stuff connect with him",
+        recieverID:item.sellerID,
+        content : "there is one offer "+price+" to you on your "+item.title+" stuff connect with him",
         date: dateTime,
         isRead :false
       };
