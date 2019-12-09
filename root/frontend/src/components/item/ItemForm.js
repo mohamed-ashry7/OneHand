@@ -1,8 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Filepond from "../filepond"
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -52,6 +50,10 @@ function ItemForm(props) {
   var description = "";
   var price = 0;
 
+  function refreshPage() {
+    window.location.reload(true);
+  }
+
   const onChangeValueHandler = (val) => {
     file = val; 
   }
@@ -77,7 +79,7 @@ function ItemForm(props) {
         description:description,
         address:(country+"/"+city+"/"+addressline)
       };
-    }if(type === "Donate"){
+    }else if(type === "Donate"){
       body = {
         type:"Donate",
         title:title,
@@ -98,12 +100,14 @@ function ItemForm(props) {
         address:(country+"/"+city+"/"+addressline)
       };
     }
+    console.log(type)
     console.log(body);
     let res;
     try {
       res = axios.post("http://localhost:3000/api/items", body);
       if (res.status === 200) {
-        console.log(res)
+        alert("Item was added successfully");
+        refreshPage();
       }
     } catch(error) {console.log(error.message)}
     handleClose();

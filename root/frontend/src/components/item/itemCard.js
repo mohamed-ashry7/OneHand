@@ -4,8 +4,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Stripe from "../stripeBtn"
 
 
 class ItemCard extends React.Component {
@@ -83,12 +83,12 @@ class ItemCard extends React.Component {
           </CardContent>
         </CardActionArea>
         <CardActions style={{ display: "flex", position: "relative" }}>
-          <Button size="small" color="primary">
+          <h4 size="small" color="primary">
              {(sellerID!=null)?sellerID.firstName + " " +sellerID.lastName:""} 
-          </Button>
-          <Button size="small" color="primary" style={{position: "absolute",right:"0px"}} >
-            {(item.type === "Sell")?"Buy":"Exchange"}
-          </Button>
+          </h4>
+          {(item.type === "Sell")?<Stripe item={item}/>:<Button size="big" color="primary" style={{position: "absolute",right:"0px"}} >
+              Exchange
+          </Button>}
         </CardActions>
       </Card>
     );

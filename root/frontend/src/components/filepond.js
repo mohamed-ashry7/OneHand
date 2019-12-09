@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Import React FilePond
-import { FilePond,File, registerPlugin } from 'react-filepond';
+import { FilePond, registerPlugin } from 'react-filepond';
 
 import "filepond/dist/filepond.min.css";
 
@@ -10,8 +10,6 @@ import "filepond/dist/filepond.min.css";
 // `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 // import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
-import FilePondPluginImageResize from "filepond-plugin-image-resize";
-import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -19,10 +17,8 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Register the plugins
 registerPlugin(
   FilePondPluginImageExifOrientation,
-  FilePondPluginImageResize,
   FilePondPluginImagePreview,
   FilePondPluginFileEncode,
-  FilePondPluginImageTransform
 );
 
 // Our app
